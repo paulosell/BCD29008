@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+    <h1>Votação</h1>
+    <form action="{{ url_for('votacao') }}" method=post>
+           {% for questao in lista %}
+                <label>{{ questao[0].tituloQuestao }}  (min = {{ questao[0].respostasMinimasQuestao }}, max = {{ questao[0].respostasMaximasQuestao }})</label>
+               {% for resposta in questao[1] %}
+                <div class="checkbox">
+                 <label>
+                      {% set id_questao =  questao[0].idQuestao ~ '-' ~ resposta.idResposta %}
+                    <input id="{{ resposta.idResposta }}" name="{{ id_questao }}" type="checkbox" value="y"> {{ resposta.tituloResposta }}
+                 </label>
+                </div>
+               {% endfor %}
+           {% endfor %}
+     <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Ir">
+
+    </form>
+
+{% endblock %}

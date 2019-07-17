@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
+
+
+    {% block jumbotron %}
+    <div class="jumbotron">
+        <h2>Bem vindo {{ user }}</h2>
+        <h3>Selecione as opções no menu acima</h3>
+     
+    </div>
+
+{% endblock jumbotron %}
+
+
+{% endblock %}

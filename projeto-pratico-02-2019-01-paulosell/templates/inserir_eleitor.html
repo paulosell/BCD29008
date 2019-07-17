@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block head %}
+  {{ super() }}
+     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+{% endblock %}
+
+
+
+
+
+{% block app_content %}
+
+    <h1>Selecione a eleição e os eleitores</h1>
+     <form action="{{ url_for('inserir_eleitor') }}" method=post>
+        <label for="sel1">Selecione a eleição:</label>
+        <select class="form-control" id="sel1">
+            {% for eleicao in eleicoes %}
+            <option>{{ eleicao.tituloEleicao }}</option>
+            {% endfor %}
+        </select>
+
+    <table
+      id="table"
+      data-toggle="true"
+      data-checkbox-header="true"
+      data-toolbar="#toolbar"
+      data-search="true"
+      data-show-columns="true"
+      data-height="600">
+
+    </table>
+
+
+     <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Ir">
+
+     </form>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+   <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script type='text/javascript'>
+    $(window).load(function(){
+      var data = {{data|tojson}};
+      var columns = {{columns|tojson}};
+      $(function() {
+        $('#table').bootstrapTable({
+          data: data,
+          columns: columns,
+        });
+      });
+    });
+  </script>
+
+
+<script>
+ var $table = $('#table')
+var $button = $('#submit')
+
+$(function() {
+  $button.click(function () {
+    var e = document.getElementById("sel1");
+    var strUser = e.options[e.selectedIndex].text;
+    console.log(strUser);
+    var to_send = {
+        titulo_eleicao: strUser,
+        eleitores: $table.bootstrapTable('getSelections')
+    }
+
+    var row_data = JSON.stringify(to_send);
+    $.ajax({
+          type: 'POST',
+          contentType: 'application/json',
+          data: row_data,
+          dataType: 'json',
+          url: 'http://127.0.0.1:5000/inserir_eleitor'
+      });
+    console.log(row_data);
+
+
+})})
+    </script>
+
+{% endblock %}
