@@ -1,4 +1,4 @@
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/BCD29008-classroom/projeto-pratico-02-2019-01-paulosell/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/paulosell/BCD29008/blob/master/LICENSE)
 
 # Projeto prático 02
 Projeto desenvolvido para a disciplina de Banco de Dados (BCD29008) do curso de Engenheria de Telecomunicações do Instituto Federal de Santa Catarina - câmpus São José, ministrada pelo professor Emerson Mello.
